@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.homework_32.databinding.FragmentSerialsBinding
 
@@ -24,11 +25,22 @@ class SerialsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView() {
         val serialsData = loadSerialsData()
-        val adapter = SerialAdapter(serialsData)
+        val adapter = SerialAdapter(serialsData) { serialModel ->
+            navigateToDetail(serialModel)
+        }
 
         binding.recycleViewSerials.layoutManager = LinearLayoutManager(requireContext())
         binding.recycleViewSerials.adapter = adapter
+    }
+
+    private fun navigateToDetail(serialModel: SerialModel) {
+        val action = SerialsFragmentDirections.actionSerialsFragmentToSerialDetailFragment(serialModel)
+        findNavController().navigate(action)
     }
 
     private fun loadSerialsData(): ArrayList<SerialModel> {

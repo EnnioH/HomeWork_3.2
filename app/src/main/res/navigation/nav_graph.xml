@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/serialsFragment">
+
+    <fragment
+        android:id="@+id/serialsFragment"
+        android:name="com.example.homework_32.SerialsFragment"
+        android:label="Serials"
+        tools:layout="@layout/fragment_serials">
+        <action
+            android:id="@+id/action_serialsFragment_to_serialDetailFragment"
+            app:destination="@id/serialDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/serialDetailFragment"
+        android:name="com.example.homework_32.SerialDetailFragment"
+        android:label="Serial Details"
+        tools:layout="@layout/fragment_serial_detail">
+        <argument
+            android:name="serialModel"
+            app:argType="com.example.homework_32.SerialModel" />
+    </fragment>
+
+</navigation>
